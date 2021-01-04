@@ -1,0 +1,37 @@
+body {
+  width: 33%;
+}
+
+.buttonContainer {
+  width: 75%;
+}
+
+.buttonContainer > .buttonClass,
+.operationsClass {
+  width: 27%;
+  height: 48px;
+  font-size: 20px;
+  float: left;
+}
+
+#res {
+  background-color: lightgray;
+  border: inset;
+  height: 48px;
+  font-size: 20px;
+  width: 60%;
+}
+
+#btnClr,
+#btnEql {
+  background-color: rgb(0, 81, 255);
+  color: white;
+}
+
+#btnSum,
+#btnSub,
+#btnMul,
+#btnDiv {
+  background-color: rgb(255, 153, 0);
+  color: white;
+}
