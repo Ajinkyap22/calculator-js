@@ -12,6 +12,7 @@ body {
   height: 48px;
   font-size: 20px;
   float: left;
+  margin: 1px;
 }
 
 #res {
@@ -19,7 +20,7 @@ body {
   border: inset;
   height: 48px;
   font-size: 20px;
-  width: 60%;
+  width: 61%;
 }
 
 #btnClr,
