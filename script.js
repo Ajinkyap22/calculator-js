@@ -20,24 +20,21 @@ let resetScreen = false;
 
 // EVENT LISTENERS
 
-// Clear results after clicking clear button
-btnClr.onclick = () => {
-  result.textContent = "";
-  num1 = 0;
-  num2 = 0;
-  operator = null;
-};
+btnClr.addEventListener("click", clear);
 
 decimal.addEventListener("click", enterDecimal);
 
 btnsNum.forEach((btn) => (btn.onclick = display));
 
-// Evaluate when the proper expression is inputted
-btnsOperations.forEach((btn) => btn.addEventListener("click", setOperator));
+btnsOperations.forEach((btn) =>
+  btn.addEventListener("click", storeOperator.bind(this, btn.textContent))
+);
 
 btnEql.addEventListener("click", evaluate);
 
 btnDel.addEventListener("click", deleteNum);
+
+window.addEventListener("keydown", keyboardSupport);
 
 // FUNCTIONS
 
@@ -63,13 +60,19 @@ function power(a, b) {
   return a ** b;
 }
 
-// Disable & enable the decimal button
-function enterDecimal() {
-  // limit the use of decimal point to 1
-  if (resetScreen) clearScreen();
-  if (result.textContent === "") result.textContent = "0";
-  if (result.textContent.includes(".")) return;
-  result.textContent += ".";
+function operate(operator, num1, num2) {
+  switch (operator) {
+    case "+":
+      return add(num1, num2);
+    case "-":
+      return sub(num1, num2);
+    case "*":
+      return mul(num1, num2);
+    case "/":
+      return div(num1, num2);
+    case "^":
+      return power(num1, num2);
+  }
 }
 
 // Function to display the input data
@@ -84,36 +87,20 @@ function display(e) {
   result.textContent += btn.textContent;
 }
 
-// Operate function with 2 numbers & an operator to display the operations on calc display
-function operate(operator, num1, num2) {
-  switch (operator) {
-    case "add":
-      return add(num1, num2);
-    case "sub":
-      return sub(num1, num2);
-    case "mul":
-      return mul(num1, num2);
-    case "div":
-      return div(num1, num2);
-    case "power":
-      return power(num1, num2);
-  }
-}
-
-function clearScreen() {
-  result.textContent = "";
-  resetScreen = false;
-}
-
-function deleteNum() {
-  result.textContent = result.textContent.slice(0, -1);
+// Disable & enable the decimal button
+function enterDecimal() {
+  // limit the use of decimal point to 1
+  if (resetScreen) clearScreen();
+  if (result.textContent === "") result.textContent = "0";
+  if (result.textContent.includes(".")) return;
+  result.textContent += ".";
 }
 
 // Store the 1st number & operator
-function setOperator() {
+function storeOperator(op) {
   if (operator !== null) evaluate();
 
-  operator = this.id;
+  operator = op;
   num1 = +result.textContent;
   resetScreen = true;
 }
@@ -128,11 +115,49 @@ function evaluate() {
   operator = null;
 }
 
+// This is for AC button
+function clear() {
+  result.textContent = "";
+  num1 = 0;
+  num2 = 0;
+  operator = null;
+}
+
+// This is for clearing screen in between calculations
+function clearScreen() {
+  result.textContent = "";
+  resetScreen = false;
+}
+
+function deleteNum() {
+  result.textContent = result.textContent.slice(0, -1);
+}
+
 // add keybord support
-window.addEventListener("keydown", function (e) {
+function keyboardSupport(e) {
+  if (resetScreen) clearScreen();
   // if integer or . then input
+  if (e.key >= 0 && e.key <= 9) {
+    result.textContent += e.key;
+  }
   // if +,-,/,^,* then call operate with them
+  if ("+-/*^".includes(e.key)) {
+    storeOperator(e.key);
+  }
   // if backsapce then call clear
+  if (e.key === "Backspace") {
+    deleteNum();
+  }
   // if = call evaluate
-});
-// add a active selector to buttons
+  if (e.key === "=" || e.key == "Enter") {
+    evaluate();
+  }
+  // if . call enterDecimal
+  if (e.key === ".") {
+    enterDecimal();
+  }
+  // If esc call
+  if (e.key === "Escape") {
+    clear();
+  }
+}

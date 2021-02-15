@@ -10,13 +10,24 @@
 html,
 body {
   height: 100%;
+  background-color: #f3f3f3;
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.title > * {
+  padding: 5px;
 }
 
 .calculator {
   width: 400px;
   height: 450px;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   margin: -225px 0 0 -200px;
   background-color: #202020;
@@ -49,6 +60,16 @@ button {
   outline: none;
 }
 
+button:hover {
+  opacity: 0.85;
+  transition: all 0.4s;
+}
+
+button:active {
+  transform: scale(1.1);
+  transition: all 0.4s;
+}
+
 #btn0 {
   grid-column: span 2;
 }
@@ -61,4 +82,24 @@ button {
 .buttonClass,
 #btnDot {
   background-color: #1f8fff;
+}
+
+#btnClr {
+  background-color: #30d657;
+}
+
+#btnDel {
+  background-color: rgb(243, 85, 50);
+}
+
+footer {
+  position: absolute;
+  bottom: 4%;
+  width: 100%;
+  text-align: center;
+  font-size: 13px;
+}
+
+a {
+  color: red;
 }
