@@ -2,7 +2,7 @@
 > A Calculator web-application created with HTML, CSS & JavaScript.
 
 ## Table of contents
-* [Link](#link)
+* [Preview Link](#preview-link)
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Features](#features)
@@ -11,7 +11,7 @@
 * [Contact](#contact)
 
 
-## Link
+## Preview Link
 [JavaScript Calculator](https://ajinkyap22.github.io/calculator-js/)
 
 
