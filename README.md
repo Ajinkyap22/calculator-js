@@ -37,4 +37,4 @@ Project is:  _finished_
 This was a project in The Odin Project.
 
 ## Contact
-feel free to contact me at my mail - palaskarajinkya22@gmail.com
+Feel free to contact me at my mail - palaskarajinkya22@gmail.com
